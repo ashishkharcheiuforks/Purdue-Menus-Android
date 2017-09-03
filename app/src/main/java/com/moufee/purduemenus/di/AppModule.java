@@ -1,11 +1,16 @@
 package com.moufee.purduemenus.di;
 
+import android.arch.persistence.room.Room;
+import android.content.Context;
+
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.moufee.purduemenus.api.LocalTimeTypeConverter;
-import com.moufee.purduemenus.util.AppExecutors;
 import com.moufee.purduemenus.api.Webservice;
+import com.moufee.purduemenus.db.AppDatabase;
+import com.moufee.purduemenus.db.FavoriteDao;
+import com.moufee.purduemenus.util.AppExecutors;
 
 import org.joda.time.LocalTime;
 
@@ -25,7 +30,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 @Module
-class AppModule {
+public class AppModule {
+    private Context mContext;
+
+    public AppModule(Context applicationContext){
+        mContext = applicationContext;
+    }
+
+
     @Singleton @Provides
      Webservice provideWebService(AppExecutors executors, Gson gson){
         return new Retrofit.Builder()
@@ -46,5 +58,13 @@ class AppModule {
      OkHttpClient provideHttpClient(){
         //todo: restore cookies or not?
         return new OkHttpClient();
+    }
+    @Singleton @Provides
+    AppDatabase provideDatabase(){
+        return Room.inMemoryDatabaseBuilder(mContext, AppDatabase.class).build();
+    }
+    @Singleton @Provides
+    FavoriteDao provideFavoriteDao(AppDatabase db){
+        return db.favoriteDao();
     }
 }

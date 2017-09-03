@@ -5,7 +5,6 @@ import com.moufee.purduemenus.menus.UpdateMenuTask;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import okhttp3.OkHttpClient;
 
 /**
  * Created by Ben on 25/08/2017.

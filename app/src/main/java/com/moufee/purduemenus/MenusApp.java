@@ -3,6 +3,7 @@ package com.moufee.purduemenus;
 import android.app.Application;
 
 import com.moufee.purduemenus.di.AppComponent;
+import com.moufee.purduemenus.di.AppModule;
 import com.moufee.purduemenus.di.DaggerAppComponent;
 
 /**
@@ -15,7 +16,7 @@ public class MenusApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mAppComponent = DaggerAppComponent.create();
+        mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(getApplicationContext())).build();
     }
 
     public AppComponent getAppComponent(){

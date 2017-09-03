@@ -1,5 +1,7 @@
 package com.moufee.purduemenus.menus;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.Keep;
 
 /**
@@ -7,26 +9,11 @@ import android.support.annotation.Keep;
  * Represents one favorite, as returned by the dining API
  */
 @Keep
+@Entity(tableName = "favorites")
 public class Favorite {
-
-    private String itemName;
-    private String favoriteId;
-    private String itemId;
-    private Boolean isVegetarian;
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public String getFavoriteId() {
-        return favoriteId;
-    }
-
-    public String getItemId() {
-        return itemId;
-    }
-
-    public Boolean isVegetarian() {
-        return isVegetarian;
-    }
+    public String itemName;
+    public String favoriteId;
+    @PrimaryKey
+    public String itemId;
+    public Boolean isVegetarian;
 }

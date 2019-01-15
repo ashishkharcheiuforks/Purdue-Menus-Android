@@ -69,26 +69,9 @@ public class UpdateMenuTask implements Runnable {
 
     @Override
     public void run() {
-//        mFullMenu.postValue(Resource.<FullDayMenu>loading(null));
-        ArrayList<DiningCourtMenu> fileMenus = getMenusFromFile(DATE_TIME_FORMATTER.print(mMenuDate));
-        if (fileMenus != null) {
-            mFetchedFromFile = true;
-            mFullMenu.postValue(Resource.success(new FullDayMenu(fileMenus, mMenuDate, hasLateLunch(fileMenus))));
-            Log.d(TAG, "getFullMenu: Read from file!");
-        } else {
-            mFullMenu.postValue(Resource.loading(null));
-        }
-        if (fileMenus == null || shouldFetch()) {
-            fetchFromNetwork();
-        }
-    }
-
-    private boolean shouldFetch() {
-        //todo: check if the menus from the file are too short, have a lot of null values, etc and decide when to fetch
-        return true;
-//        DateTime now = new DateTime();
-//        Log.d(TAG, "shouldFetch: days: "+Days.daysBetween(now, mMenuDate).getDays());
-//        return Math.abs(Days.daysBetween(now, mMenuDate).getDays()) > 5;
+        //issue: cant't determine cache hit/miss for loading indicator
+        mFullMenu.postValue(Resource.loading(null));
+        fetchFromNetwork();
     }
 
     private boolean hasLateLunch(List<DiningCourtMenu> menus) {

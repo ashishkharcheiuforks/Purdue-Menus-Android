@@ -25,7 +25,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -64,6 +66,13 @@ class AppModule {
         //todo: restore cookies or not?
         return new OkHttpClient.Builder()
                 .cookieJar(new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context)))
+                .cache(new Cache(context.getCacheDir(), 1024 * 1024 * 10))
+                .addInterceptor(chain -> {
+                            Request request = chain.request();
+                            request.newBuilder().header("Cache-Control", "public, max-age=" + 60 * 60 * 48).build();
+                            return chain.proceed(request);
+                        }
+                )
                 .build();
     }
 

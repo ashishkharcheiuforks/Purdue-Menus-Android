@@ -32,6 +32,7 @@ public class SettingsActivity extends SingleFragmentActivity implements SharedPr
     public static final String KEY_PREF_SHOW_SERVING_TIMES = "show_serving_times";
     public static final String KEY_PREF_USE_NIGHT_MODE = "night_mode";
     public static final String KEY_PREF_SHOW_FAVORITE_COUNT = "show_favorite_count";
+    public static final String KEY_PREF_HIDE_NOT_SERVING = "hide_not_serving";
 
     @Inject
     SharedPreferences sharedPreferences;

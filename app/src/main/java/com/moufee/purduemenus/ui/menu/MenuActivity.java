@@ -82,6 +82,9 @@ public class MenuActivity extends AppCompatActivity implements HasSupportFragmen
                     break;
                 case CustomOrderFragmentKt.KEY_PREF_DINING_COURT_ORDER:
                     mViewModel.setDate(mViewModel.getCurrentDate().getValue());
+                    break;
+                case SettingsActivity.KEY_PREF_HIDE_NOT_SERVING:
+                    mMenuPagerAdapter.setHideClosedLocations(mSharedPreferences.getBoolean(key, false));
             }
         }
     };
@@ -194,6 +197,7 @@ public class MenuActivity extends AppCompatActivity implements HasSupportFragmen
         FragmentManager fragmentManager = getSupportFragmentManager();
         mMenuPagerAdapter = new MenuPagerAdapter(fragmentManager);
         mMenuPagerAdapter.setShowFavoriteCount(mSharedPreferences.getBoolean(SettingsActivity.KEY_PREF_SHOW_FAVORITE_COUNT, true));
+        mMenuPagerAdapter.setHideClosedLocations(mSharedPreferences.getBoolean(SettingsActivity.KEY_PREF_HIDE_NOT_SERVING, false));
         mBinding.menuViewPager.setAdapter(mMenuPagerAdapter);
 
         tabLayout.setupWithViewPager(mBinding.menuViewPager);

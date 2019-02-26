@@ -17,6 +17,11 @@
         android:key="show_favorite_count"
         android:title="@string/pref_title_show_favorite_count" />
 
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="hide_not_serving"
+        android:title="@string/pref_hide_not_serving" />
+
     <Preference
         android:key="dining_court_order"
         android:title="Manage Dining Court Display Order"

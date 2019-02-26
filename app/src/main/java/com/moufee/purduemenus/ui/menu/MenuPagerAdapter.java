@@ -17,9 +17,11 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 public class MenuPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<DiningCourtMenu> diningCourtMenus = new ArrayList<>();
+    private List<DiningCourtMenu> mAllMenus = new ArrayList<>();
     private int mealIndex;
     private Set<String> mFavoritesSet;
     private boolean mShowFavoriteCount = true;
+    private boolean mHideClosedLocations = true;
 
     public void setFavoritesSet(Set<String> favoritesSet) {
         mFavoritesSet = favoritesSet;
@@ -31,12 +33,35 @@ public class MenuPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     public void setMenus(List<DiningCourtMenu> diningCourtMenus) {
-        this.diningCourtMenus = diningCourtMenus;
+        this.mAllMenus = diningCourtMenus;
+        filterLocations();
+        notifyDataSetChanged();
+    }
+
+    public void setHideClosedLocations(boolean hideClosedLocations) {
+        mHideClosedLocations = hideClosedLocations;
+        filterLocations();
+        notifyDataSetChanged();
+    }
+
+    private void filterLocations() {
+        if (!mHideClosedLocations) {
+            diningCourtMenus = mAllMenus;
+            return;
+        }
+        diningCourtMenus = new ArrayList<>();
+        for (DiningCourtMenu menu :
+                mAllMenus) {
+            if (menu.isServing(mealIndex)) {
+                diningCourtMenus.add(menu);
+            }
+        }
         notifyDataSetChanged();
     }
 
     public void setMealIndex(int mealIndex) {
         this.mealIndex = mealIndex;
+        filterLocations();
         notifyDataSetChanged();
     }
 

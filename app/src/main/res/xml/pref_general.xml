@@ -1,4 +1,4 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--<SwitchPreference
         android:defaultValue="true"
@@ -7,12 +7,12 @@
         android:summaryOn="@string/preference_vegetarian_summary_on"
         android:title="@string/preference_title_show_vegetarian_icons"/>-->
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:defaultValue="true"
         android:key="show_serving_times"
         android:title="@string/pref_show_serving_times" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:defaultValue="true"
         android:key="show_favorite_count"
         android:title="@string/pref_title_show_favorite_count" />
@@ -41,4 +41,4 @@
         android:title="@string/title_privacy_policy" />
 
 
-</PreferenceScreen>
+</androidx.preference.PreferenceScreen>

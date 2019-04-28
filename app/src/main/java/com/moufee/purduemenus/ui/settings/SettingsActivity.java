@@ -2,7 +2,6 @@ package com.moufee.purduemenus.ui.settings;
 
 
 import android.Manifest;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,25 +9,27 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import com.moufee.purduemenus.repository.FavoritesRepository;
 import com.moufee.purduemenus.util.SingleFragmentActivity;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasFragmentInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Settings Activity
  */
 
-public class SettingsActivity extends SingleFragmentActivity implements SharedPreferences.OnSharedPreferenceChangeListener, HasFragmentInjector {
+public class SettingsActivity extends SingleFragmentActivity implements SharedPreferences.OnSharedPreferenceChangeListener, HasSupportFragmentInjector {
     public static final String KEY_PREF_SHOW_SERVING_TIMES = "show_serving_times";
     public static final String KEY_PREF_USE_NIGHT_MODE = "night_mode";
     public static final String KEY_PREF_SHOW_FAVORITE_COUNT = "show_favorite_count";
@@ -133,7 +134,7 @@ public class SettingsActivity extends SingleFragmentActivity implements SharedPr
     }
 
     @Override
-    public AndroidInjector<Fragment> fragmentInjector() {
+    public AndroidInjector<Fragment> supportFragmentInjector() {
         return mDispatchingAndroidInjector;
     }
 }

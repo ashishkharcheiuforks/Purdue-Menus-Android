@@ -7,12 +7,12 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import com.moufee.purduemenus.R;
 import com.moufee.purduemenus.repository.FavoritesRepository;
@@ -20,13 +20,13 @@ import com.moufee.purduemenus.ui.login.LoginActivity;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * Displays preferences for the app
  */
 
-public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 
     public static final String KEY_PREF_SHOW_SERVING_TIMES = "show_serving_times";
@@ -48,7 +48,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     @Override
     public void onAttach(Context context) {
-        AndroidInjection.inject(this);
+        AndroidSupportInjection.inject(this);
         super.onAttach(context);
     }
 
@@ -59,10 +59,15 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     }
 
     @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.pref_general, rootKey);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.pref_general);
+//        addPreferencesFromResource(R.xml.pref_general);
 
 
         mLoginPref = findPreference(PREF_LOG_IN);

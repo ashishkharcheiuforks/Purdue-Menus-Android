@@ -36,6 +36,10 @@
     <string name="pref_night_mode_on" translatable="false">mode_on</string>
     <string name="pref_night_mode_auto" translatable="false">mode_auto</string>
 
+    <string name="pref_title_night_mode">Dark Mode</string>
+    <string name="pref_title_dining_court_order">Manage Dining Court Display Order</string>
+    <string name="pref_summary_dining_court_order">Drag and drop to customize.</string>
+
     <string name="off">Off</string>
     <string name="auto">Auto</string>
     <string name="on">On</string>

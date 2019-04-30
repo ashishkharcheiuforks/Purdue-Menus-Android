@@ -50,4 +50,7 @@
     <string name="action_only_logout">Se déconnecter seulement</string>
     <string name="title_privacy_policy">Politique de confidentialité</string>
     <string name="desc_toggle_visibility">basculer la visibilité</string>
+    <string name="pref_summary_dining_court_order">Glisser-déposer pour personnaliser.</string>
+    <string name="pref_title_dining_court_order">Gérer l\'ordre d\'affichage de les salles à manger</string>
+    <string name="pref_title_night_mode">Mode nuit</string>
 </resources>
